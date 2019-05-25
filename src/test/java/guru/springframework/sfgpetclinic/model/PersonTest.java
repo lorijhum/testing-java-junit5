@@ -25,12 +25,10 @@ class PersonTest implements ModelTests {
     }
     @RepeatedTest(value=10, name= "{displayName} : {currentRepetition} - {totalRepetitions}")
     @DisplayName("my repeated test")
-    @Test
-
     void repeatedTest() {
        //to do write test we want to repeat.  display name gets put in repeatedTest display name,
         //currentRepetition is put in that placeholder and totalRepetition is put in that placeholder
-        //so we get output of my repeated test: 1-10 
+        //so we get output of my repeated test: 1-10
         }
 
 
