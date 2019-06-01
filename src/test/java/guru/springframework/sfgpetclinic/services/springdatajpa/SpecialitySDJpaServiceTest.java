@@ -37,6 +37,18 @@ class SpecialitySDJpaServiceTest {
 
         //here we verify that the method was called once (that is the default of verify, once)
         verify(specialtyRepository).findById(1L);
+
+        //here we verify that the method was called to find any id of type long
+        verify(specialtyRepository).findById(anyLong());
+    }
+
+    @Test
+    void deleteByObject() {
+        Speciality speciality = new Speciality();
+        service.delete(speciality);
+
+        //using an argument matcher in the verify to check that we deleted an object of the Speciality Class
+        verify(specialtyRepository).delete(any(Speciality.class));
     }
     @Test
     void deleteById() {
