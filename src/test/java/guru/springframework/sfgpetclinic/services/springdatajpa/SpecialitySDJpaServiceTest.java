@@ -27,7 +27,7 @@ class SpecialitySDJpaServiceTest {
         //here we create an instance of Speciality
         Speciality speciality = new Speciality();
         // then we say when calling findById(1L), we return the speciality we just created above
-        when(specialtyRepository.findById(1L)).thenReturn(Optional.of(speciality));
+       when(specialtyRepository.findById(1L)).thenReturn(Optional.of(speciality));
 
         //here we find the speciality by id
         Speciality foundSpeciality = service.findById(1L);
