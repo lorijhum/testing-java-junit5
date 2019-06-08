@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -31,6 +32,9 @@ class OwnerControllerTest {
 
     @InjectMocks
     private OwnerController controller;
+
+    @Captor
+    ArgumentCaptor<String> argumentCaptor;
 
     @Test
     @DisplayName("Test correct view name is returned from controller")
@@ -78,5 +82,21 @@ class OwnerControllerTest {
         //then
      //   assertThat(captor.getValue()).isEqualToIgnoringCase("Lou");
         assertThat("%Lou%").isEqualToIgnoringCase(captor.getValue());
+    }
+
+    @Test
+    void processFindFormAnotherTypeOfCaptor() {
+        //this uses the argument captor annotated above
+        //given
+        Owner owner = new Owner(1L, "Lucy", "Lou");
+        List<Owner> ownerList = new ArrayList<>();
+
+        given(ownerService.findAllByLastNameLike(argumentCaptor.capture())).willReturn(ownerList);
+
+        //when
+        String viewName = controller.processFindForm(owner, bindingResult, null);
+        //then
+        //   assertThat(captor.getValue()).isEqualToIgnoringCase("Lou");
+        assertThat("%Lou%").isEqualToIgnoringCase(argumentCaptor.getValue());
     }
 }
