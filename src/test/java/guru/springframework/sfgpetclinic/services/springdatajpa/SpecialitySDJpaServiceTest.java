@@ -22,10 +22,10 @@ import static org.mockito.Mockito.*;
 class SpecialitySDJpaServiceTest {
 
     @Mock(lenient = true)
-    SpecialtyRepository specialtyRepository;
+    private SpecialtyRepository specialtyRepository;
 
     @InjectMocks
-    SpecialitySDJpaService service;
+    private SpecialitySDJpaService service;
 
     @Test
     void findById() {
@@ -68,6 +68,8 @@ class SpecialitySDJpaServiceTest {
         // the default for the verify below is 1, so without ,times, it verifies the method was called once
         //then
         then(specialtyRepository).should(times(2)).deleteById(1L);
+        //adding a check for timeout after it runs too long
+        then(specialtyRepository).should(timeout(100).times(2)).deleteById(1L);
     }
 
     @Test
